@@ -2,6 +2,9 @@ from django.shortcuts import render
 from .models import Animal, Protectora, Colaborador
 # Create your views here.
 
+def index(request):
+    return render(request, 'animales/index.html')
+
 def animal_list(request):
     animales = Animal.objects.all()
     return render(request, 'animales/animal_list.html', {'animales_mostrar': animales})
