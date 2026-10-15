@@ -12,7 +12,7 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=200)
     correoElectronico = models.CharField(max_length=200,unique=True)
     contrasena = models.CharField(max_length=200)
-    fechaRegistro = models.DateField()
+    fechaRegistro = models.DateTimeField(blank=True, null=True)
     
     
 
@@ -22,29 +22,8 @@ class Usuario(models.Model):
                 "Contraseña: " + self.contrasena + 
                 "Fecha de registro:" + self.fechaRegistro)
 
-class Tarea(models.Model):
-    titulo = models.CharField(max_length=200)
-    descripcion = models.TextField()
-    prioridad = models.IntegerField()
-    estado=[
-        ("Pendiente", "Pendiente"),
-        ("Progreso", "Progreso"),
-        ("Completada", "Completada"),
-    ]
-    completada = models.BooleanField(default=False)
-    fecha_creacion = models.DateField()
-    hora_vencimiento = models.TimeField()
     
-    def __str__(self):
-        return (
-            "Título: " + self.titulo +
-            " Descripción: " + self.descripcion +
-            " Prioridad: " + str(self.prioridad) +
-            " Estado: " + self.estado +
-            " Completada: " + str(self.completada) +
-            " Fecha de creación: " + str(self.fecha_creacion) +
-            " Hora de vencimiento: " + str(self.hora_vencimiento)
-        )
+
     
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=200)
@@ -53,7 +32,8 @@ class Proyecto(models.Model):
     fecha_inicio = models.DateField()
     fecha_finalizacion = models.DateField()
     usuarios = models.ManyToManyField(Usuario, through='AsignaProyectos', related_name="proyectos")
-    proyectos = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    creador = models.ForeignKey(Usuario,on_delete=models.CASCADE,elated_name="proyectos_creados",)    
+    
     def __str__(self):
          return (
             "Nombre: " + self.nombre +
@@ -70,19 +50,51 @@ class Etiqueta(models.Model):
         return self.nombre
 
 
+class Tarea(models.Model):
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    prioridad = models.IntegerField()
+    estado=[
+        ("Pendiente", "Pendiente"),
+        ("Progreso", "Progreso"),
+        ("Completada", "Completada"),
+    ]
+    completada = models.BooleanField(default=False)
+    fecha_creacion = models.DateField()
+    hora_vencimiento = models.TimeField()
+    creador = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="tareas_creadas",)
+    proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE,related_name="tareas",)
+    etiquetas = models.ManyToManyField(Etiqueta,related_name="tareas",blank=True,)
+    usuarios = models.ManyToManyField(Usuario,through="AsignacionTarea",related_name="tareas_asignadas",)
+    
+    def __str__(self):
+        return (
+            "Título: " + self.titulo +
+            " Descripción: " + self.descripcion +
+            " Prioridad: " + str(self.prioridad) +
+            " Estado: " + self.estado +
+            " Completada: " + str(self.completada) +
+            " Fecha de creación: " + str(self.fecha_creacion) +
+            " Hora de vencimiento: " + str(self.hora_vencimiento)
+        )
+        
 class AsignacionTarea(models.Model):
     observaciones = models.TextField(blank=True)
     fecha_asignacion = models.DateTimeField(default=timezone.now)
+    usuarios = models.ManyToManyField(Usuario, through='AsignaProyectos', related_name="AsignacionTareas")
+
 
     def __str__(self):
         return ("Observaciones: " + self.observaciones + 
-                "Fecha de asignacion: " + self.fecha_asignacion)
+                "Fecha de asignacion: " + self.fecha_asignacion + 
+                "Usuaraios ASignados: " + self.usuarios)
 
 
 class Comentario(models.Model):
     contenido = models.TextField()
     fecha_comentario = models.DateTimeField(default=timezone.now)
-
+    autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="comentarios",)
+    tarea = models.ForeignKey(Tarea,on_delete=models.CASCADE,related_name="comentarios",)
 
     def __str__(self):
         return ("Comentario de " + self.usuario + "en " + self.tarea)
@@ -96,3 +108,14 @@ class AsignaProyectos(models.Model):
     def __str__(self):
             return ("Usuario: " + self.usuarios + 
                     "Proyectos: " + self.proyectos)
+            
+class CrearTareas(models.Model):
+    usuarios = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    tareas = models.ForeignKey(Tarea, on_delete=models.CASCADE)
+        
+    def __str__(self):
+            return ("Usuario: " + self.usuarios + 
+                    "Tareas: " + self.tareas)
+
+class EtiquetaAsociada(models.Model):
+    tare = models.ManyToManyField(Usuario, through='AsignaProyectos', related_name="AsignacionTareas")
