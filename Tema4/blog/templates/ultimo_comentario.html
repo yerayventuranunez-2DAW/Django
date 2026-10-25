@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Último Comentario del Proyecto</title>
+</head>
+<body>
+    <h1>Último Comentario en el Proyecto</h1>
+    
+    <a href="{% url 'inicio' %}">Volver al Inicio</a>
+    
+    <div>
+        <h3>Tarea: {{ comentario.tarea.titulo }}</h3>
+        <p><strong>Contenido del comentario:</strong> {{ comentario.contenido }}</p>
+        <p><strong>Autor (Último usuario):</strong> {{ comentario.autor.nombre }}</p>
+        <p><strong>Fecha del comentario:</strong> {{ comentario.fecha_comentario }}</p>
+    </div>
+</body>
+</html>
