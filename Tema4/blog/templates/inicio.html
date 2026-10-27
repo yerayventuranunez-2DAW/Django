@@ -10,7 +10,7 @@
         <li><a href="{% url 'lista_proyectos' %}">2. Ver todos los proyectos</a></li>
         <li><a href="{% url 'tareas_proyecto' 1 %}">3. Ver todas las tareas de un proyecto</a></li>
         <li><a href="{% url 'usuarios_tarea' 1 %}">4. Ver todos los usuario de una tarea</a></li>
-        <li><a href="{% url 'tareas_observaciones' 'urgente' %}">5. Tareas con "urgente" en observaciones</a></li>
+        <li><a href="{% url 'tareas_observaciones' 'urgente'%}">5. Tareas con "urgente" en observaciones</a></li>
         <li><a href="{% url 'tareas_completadas' 2023 2026 %}">6. Tareas completadas entre 2023 y 2026</a></li>
         <li><a href="{% url 'ultimo_comentario' 1 %}">7. Último comentario del proyecto 1</a></li>
         <li><a href="{% url 'comentarios_filtrados' 1 'Re' 2026 %}">8. Comentarios que empiezan por "Re" del 2026 en tarea 1</a></li>
