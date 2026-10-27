@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Etiquetas del Proyecto</title>
+</head>
+<body>
+    <h1>Etiquetas del {{proyecto.nombre}}</h1>
+    
+    {% if etiquetas %}
+        <ul>
+            {% for tarea in etiquetas %}
+                {% for etiqueta in tarea.etiquetas.all %}
+                    <li>{{ etiqueta.nombre }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay etiquetas en este proyecto.</p>
+    {% endif %}
+    
+    <a href="{% url 'inicio' %}">Volver a proyectos</a>
+</body>
+</html>

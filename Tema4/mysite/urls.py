@@ -20,4 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog.urls')),
+    
 ]
+handler400 = 'blog.views.mi_error_400'
+handler403 = 'blog.views.mi_error_403'
+handler404 = 'blog.views.mi_error_404'
+handler500 = 'blog.views.mi_error_500'

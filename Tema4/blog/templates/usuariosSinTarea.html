@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios sin tareas</title>
+</head>
+<body>
+    <h1>Usuarios que no tienen ninguna tarea asignada</h1>
+    
+    <ul>
+        {% for usuario in usuarios %}
+            <li>{{ usuario.nombre }} ({{ usuario.correoElectronico }})</li>
+        {% empty %}
+            <li>Todos los usuarios tienen al menos una tarea asignada.</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+</body>
+</html>

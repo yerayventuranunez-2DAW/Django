@@ -19,4 +19,8 @@ urlpatterns = [
     path('proyecto/<int:proyecto_id>/ultimo-comentario/', views.ultimo_comentario_proyecto, name='ultimo_comentario'),
     # Ejercicio 8
     path('tarea/<int:tarea_id>/comentarios/<str:palabra>/<int:anyo>/', views.comentarios_filtrados, name='comentarios_filtrados'),
+    # Ejercicio 9
+    path('etiquetas/<int:id_proyecto>/', views.listar_etiquetas, name='listar_etiquetas'),
+    # Ejercicio 10
+    path('usuario/noAsignadoTarea/', views.usuariosSinTarea, name='usuariosSinTarea'),
 ]
