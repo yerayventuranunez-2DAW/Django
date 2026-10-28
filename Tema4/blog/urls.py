@@ -23,4 +23,10 @@ urlpatterns = [
     path('etiquetas/<int:id_proyecto>/', views.listar_etiquetas, name='listar_etiquetas'),
     # Ejercicio 10
     path('usuario/noAsignadoTarea/', views.usuariosSinTarea, name='usuariosSinTarea'),
+    #Ejercicio 11
+    path('probar-400/', views.probar_400, name='probar_400'),
+    path('probar-403/', views.probar_403, name='probar_403'),
+    path('probar-404/', views.probar_404, name='probar_404'),
+    path('probar-500/', views.probar_500, name='probar_500'),
+    
 ]
