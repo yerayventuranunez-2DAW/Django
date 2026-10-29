@@ -79,9 +79,9 @@ def mi_error_404(request,exception=None):
 def mi_error_500(request):
     return render(request, 'errores/500.html',None,None,500)
 
-# ==========================================
+
 # VISTAS TEMPORALES PARA PROBAR LOS ERRORES
-# ==========================================
+
 def probar_400(request):
     raise SuspiciousOperation("Prueba intencional del error 400")
 
@@ -92,5 +92,5 @@ def probar_404(request):
     raise Http404("Prueba intencional del error 404")
 
 def probar_500(request):
-    resultado = 1 / 0  # Esto fuerza un error 500 (ZeroDivisionError)
+    resultado = 1 / 0  # Esto fuerza un error 500 
     return render(request, 'inicio.html')
