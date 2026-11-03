@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comentarios Filtrados</title>
+</head>
+<body>
+    <h1>Comentarios de la tarea: {{ tarea.titulo }}</h1>
+    <h2>Filtro: Palabra "{{ palabra }}" | Año {{ anyo }}</h2>
+    
+    <a href="{% url 'inicio' %}">Volver al Inicio</a>
+    
+    <ul>
+        {% for comentario in comentarios %}
+            <li>
+                <p><strong>Contenido:</strong> {{ comentario.contenido }}</p>
+                <p><strong>Autor:</strong> {{ comentario.autor.nombre }}</p>
+                <p><strong>Fecha:</strong> {{ comentario.fecha_comentario }}</p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>No se encontraron comentarios que empiecen por "{{ palabra }}" del año {{ anyo }}.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

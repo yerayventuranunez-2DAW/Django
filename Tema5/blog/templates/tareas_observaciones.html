@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tareas con Observaciones Filtradas</title>
+</head>
+<body>
+    <h1>Tareas que contienen "{{ texto_buscado }}" en sus observaciones</h1>
+    
+    <a href="{% url 'inicio' %}">Volver al Inicio</a>
+    
+    <ul>
+        {% for tarea in tareas %}
+            <li>
+                <h3>{{ tarea.titulo }}</h3>
+                <p><strong>Descripción:</strong> {{ tarea.descripcion }}</p>
+                <p><strong>Estado:</strong> {{ tarea.estado }}</p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>No se encontraron tareas con "{{ texto_buscado }}" en las observaciones.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

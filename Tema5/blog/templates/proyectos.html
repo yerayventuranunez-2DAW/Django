@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Proyectos</title>
+</head>
+<body>
+    <h1>Listado de Proyectos</h1>
+    <a href="{% url 'inicio' %}">Volver al Inicio</a>
+    
+    <ul>
+        {% for proyecto in proyectos %}
+            <li>
+                <h3>{{ proyecto.nombre }}</h3>
+                <p><strong>Descripción:</strong> {{ proyecto.descripcion }}</p>
+                <p><strong>Duración estimada:</strong> {{ proyecto.duracion_estimada }}</p>
+                <p><strong>Fecha inicio:</strong> {{ proyecto.fecha_inicio }} | <strong>Fecha fin:</strong> {{ proyecto.fecha_finalizacion }}</p>
+                <p><strong>Creador:</strong> {{ proyecto.creador.nombre }}</p>
+                <p><strong>Usuarios asignados:</strong>
+                    {% for usuario in proyecto.usuarios.all %}
+                        {{ usuario.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        No hay usuarios asignados.
+                    {% endfor %}
+                </p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>No hay proyectos registrados.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
