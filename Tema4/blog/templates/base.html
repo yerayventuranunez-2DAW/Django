@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include "menu.html" %}
+    <img src="{% static 'imagenes/imagen.png' %}" alt="Imagen del proyecto">
+
+    {% block cabecera %}
+    {% endblock %}
+    
+    {% block contenido %}
+    {% endblock %}
+    
+    {% include "footer.html" %}
+    <script src="{% static 'javascript/script.js' %}"></script>
+
+</body>
+</html>
