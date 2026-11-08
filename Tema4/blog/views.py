@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied, SuspiciousOperation
 from django.http import Http404
 # Create your views here.
     # Ejercicio 1
-def index(request):
+def inicio(request):
     return render(request, 'inicio.html')
     
     # Ejercicio 2

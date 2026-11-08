@@ -1,0 +1,12 @@
+<li>
+    <p><strong>Contenido:</strong> {{ comentario.contenido }}</p>
+    {% if "Re" in comentario.contenido %}
+        <p>Este comentario contiene "Re".</p>
+    {% endif %}
+    {% if "urgente" not in comentario.contenido %}
+        <p>Este comentario no es urgente.</p>
+    {% endif %}
+    <p><strong>Autor:</strong> {{ comentario.autor.nombre }}</p>
+    <p><strong>Fecha:</strong> {{ comentario.fecha_comentario }}</p>
+    <hr>
+</li>

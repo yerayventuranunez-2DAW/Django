@@ -12,3 +12,7 @@ nav ul li {
     display: inline;
     margin-right: 15px;
 }
+img {
+    width: 150px;
+    height: auto;
+}

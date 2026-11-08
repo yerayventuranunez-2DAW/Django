@@ -1,30 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tareas del Proyecto</title>
-</head>
-<body>
+{%extends "base.html"%}
+
+{%block cabecera%}
     <h1>Tareas del Proyecto: {{ proyecto.nombre }}</h1>
     
-    <a href="{% url 'inicio' %}">Volver al Inicio</a>
-    
+    <a href="{% url 'index' %}">Volver al Inicio</a>
+{%endblock%}  
+
+{%block contenido%}
     <ul>
         {% for tarea in tareas %}
-            <li>
-                <h3>{{ tarea.titulo }}</h3>
-                <p><strong>Descripción:</strong> {{ tarea.descripcion }}</p>
-                <p><strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
-                <p><strong>Estado:</strong> {{ tarea.estado }}</p>
-                <p><strong>Completada:</strong> {{ tarea.completada }}</p>
-                <p><strong>Fecha creación:</strong> {{ tarea.fecha_creacion }}</p>
-                <p><strong>Hora vencimiento:</strong> {{ tarea.hora_vencimiento }}</p>
-                <p><strong>Creador:</strong> {{ tarea.creador.nombre }}</p>
-                <hr>
-            </li>
+            {% include "items/tarea_item.html" %}
         {% empty %}
             <li>No hay tareas registradas para este proyecto.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{%endblock%}

@@ -1,0 +1,25 @@
+<li>
+    <h3>{{ forloop.counter }}. {{ proyecto.nombre }}</h3>
+    <p><strong>Descripción:</strong> {{ proyecto.descripcion }}</p>
+    <p><strong>Duración estimada:</strong> {{ proyecto.duracion_estimada }}
+        {% if proyecto.duracion_estimada > 30 or proyecto.duracion_estimada == 0 %}
+            (proyecto largo o sin estimar)
+        {% endif %}
+    </p>
+    <p><strong>Fecha inicio:</strong> {{ proyecto.fecha_inicio }} | <strong>Fecha fin:</strong> {{ proyecto.fecha_finalizacion }}</p>
+    <p><strong>Creador:</strong>
+        {% if not proyecto.creador %}
+            Sin creador
+        {% else %}
+            {{ proyecto.creador.nombre }}
+        {% endif %}
+    </p>
+    <p><strong>Usuarios asignados:</strong>
+        {% for usuario in proyecto.usuarios.all %}
+            {{ usuario.nombre }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            No hay usuarios asignados.
+        {% endfor %}
+    </p>
+    <hr>
+</li>

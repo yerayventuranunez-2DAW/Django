@@ -1,0 +1,19 @@
+<li>
+    <h3>{{ forloop.counter }}. {{ tarea.titulo }}</h3>
+    <p><strong>Descripción:</strong> {{ tarea.descripcion }}</p>
+    <p><strong>Prioridad:</strong>
+        {% if tarea.prioridad > 10000 %}
+            Alta ({{ tarea.prioridad }})
+        {% elif tarea.prioridad > 0 %}
+            Media ({{ tarea.prioridad }})
+        {% else %}
+            Baja ({{ tarea.prioridad }})
+        {% endif %}
+    </p>
+    <p><strong>Estado:</strong> {{ tarea.estado }}</p>
+    <p><strong>Completada:</strong> {{ tarea.completada }}</p>
+    <p><strong>Fecha creación:</strong> {{ tarea.fecha_creacion }}</p>
+    <p><strong>Hora vencimiento:</strong> {{ tarea.hora_vencimiento }}</p>
+    <p><strong>Creador:</strong> {{ tarea.creador.nombre }}</p>
+    <hr>
+</li>

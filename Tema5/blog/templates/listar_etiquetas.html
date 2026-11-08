@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Etiquetas del Proyecto</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block cabecera %}
     <h1>Etiquetas del {{proyecto.nombre}}</h1>
-    
+{% endblock %}
+
+{% block contenido %}
     {% if etiquetas %}
         <ul>
             {% for tarea in etiquetas %}
                 {% for etiqueta in tarea.etiquetas.all %}
-                    <li>{{ etiqueta.nombre }}</li>
+                    {% include "etiqueta.item.html" %}
                 {% endfor %}
             {% endfor %}
         </ul>
@@ -19,6 +17,5 @@
         <p>No hay etiquetas en este proyecto.</p>
     {% endif %}
     
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
-</body>
-</html>
+    <a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

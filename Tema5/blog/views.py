@@ -5,8 +5,8 @@ from django.core.exceptions import PermissionDenied, SuspiciousOperation
 from django.http import Http404
 # Create your views here.
     # Ejercicio 1
-def inicio(request):
-    return render(request, 'inicio.html')
+def index(request):
+    return render(request, 'index.html')
     
     # Ejercicio 2
 def listar_proyectos(request):
@@ -93,4 +93,4 @@ def probar_404(request):
 
 def probar_500(request):
     resultado = 1 / 0  # Esto fuerza un error 500 
-    return render(request, 'inicio.html')
+    return render(request, 'index.html')
